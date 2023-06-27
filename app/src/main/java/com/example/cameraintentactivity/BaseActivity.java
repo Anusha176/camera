@@ -128,13 +128,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         Log.d("testing", "1");
         //
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Log.d("testing", "2");
+
             photoCaptureIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Log.d("testing", "3");
+
             Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".fileProvider", photoFile);
-            Log.d("testing", "4");
+
             photoCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
-            Log.d("testing", "5");
+
         } else {
             photoCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
         }
