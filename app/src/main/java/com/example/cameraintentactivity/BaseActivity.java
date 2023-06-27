@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -195,13 +197,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("anusha", "checking");
+
+        Log.e("anusha", photoFile.getAbsolutePath());
+        Toast.makeText(this, photoFile.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
         super.onActivityResult(requestCode, resultCode, data);
         Fragment visibleFragment = getSupportFragmentManager().findFragmentById(R.id.container);
         if (visibleFragment != null) {
             visibleFragment.onActivityResult(requestCode, resultCode, data);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
+            Glide.with(this).load(photoFile).into(nav_logo);
             //
             if (requestCode == GALLERY_PICK_REQUEST_CODE_400
                     && resultCode == Activity.RESULT_OK
